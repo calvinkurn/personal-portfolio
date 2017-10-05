@@ -9,7 +9,7 @@ class PageView extends React.Component {
 		}
 	}
 	render() {
-		if(this.state.layer == 1){
+		if(this.state.layer === 1){
 			return(
 				<Layer1/>
 			)

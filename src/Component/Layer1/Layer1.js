@@ -4,7 +4,7 @@ import layer1 from './Layer1.css'
 class Layer1 extends Component {
 	render(){
 		return(
-			<div styleName="layer1.test">
+			<div styleName={layer1.test}>
 				Layer1
 			</div>
 		)
