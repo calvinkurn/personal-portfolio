@@ -1,0 +1,146 @@
+.loading_wrapper {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.goo_container {
+  z-index: 1000;
+}
+.loader {
+  z-index: 1000;
+  opacity: 1;
+  animation-play-state: running;
+  transition: opacity ease-in 0.5s;
+  position: relative;
+}
+.loader.hidden {
+  opacity: 0;
+  animation-play-state: paused;
+}
+.loader .wrapper {
+  position: fixed;
+  padding: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5, 0.5);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+}
+.loader .container {
+  width: 200px;
+  height: 200px;
+  margin: auto;
+  filter: url("#goo");
+  animation: rotate-move 2s ease-in-out infinite;
+}
+.loader .dot {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #CE93D8;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.loader .dot_4 {
+  background-color: #0D47A1;
+  animation: dot-4-move 2s ease infinite;
+}
+.loader .dot_3 {
+  background-color: #0275d8;
+  animation: dot-3-move 2s ease infinite;
+}
+.loader .dot_2 {
+  background-color: #FDD835;
+  animation: dot-2-move 2s ease infinite;
+}
+.loader .dot_1 {
+  background-color: #CE93D8;
+  animation: dot-1-move 2s ease infinite;
+}
+@keyframes dot-4-move {
+  20% {
+    transform: scale(1);
+  }
+  45% {
+    transform: translate(16px, -16px) scale(0.45);
+  }
+  60% {
+    transform: translate(80px, -80px) scale(0.45);
+  }
+  80% {
+    transform: translate(-80px, -80px) scale(0.45);
+  }
+  100% {
+    transform: translate(0px) scale(1);
+  }
+}
+@keyframes dot-3-move {
+  20% {
+    transform: scale(1);
+  }
+  45% {
+    transform: translate(-16px, -16px) scale(0.45);
+  }
+  60% {
+    transform: translate(-80px, -80px) scale(0.45);
+  }
+  80% {
+    transform: translate(80px, -80px) scale(0.45);
+  }
+  100% {
+    transform: translate(0px) scale(1);
+  }
+}
+@keyframes dot-2-move {
+  20% {
+    transform: scale(1);
+  }
+  45% {
+    transform: translate(-16px, 16px) scale(0.45);
+  }
+  60% {
+    transform: translate(-80px, 80px) scale(0.45);
+  }
+  80% {
+    transform: translate(-80px, 80px) scale(0.45);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+@keyframes dot-1-move {
+  20% {
+    transform: scale(1);
+  }
+  45% {
+    transform: translate(16px, 16px) scale(0.45);
+  }
+  60% {
+    transform: translate(80px, 80px) scale(0.45);
+  }
+  80% {
+    transform: translate(80px, 80px) scale(0.45);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+@keyframes rotate-move {
+  55% {
+    transform: rotate(0deg);
+  }
+  80% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

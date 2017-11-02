@@ -1,0 +1,19 @@
+.main_wrapper {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.canvas {
+	vertical-align: top;
+}
+.content_wrapper {
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	right: 20%;
+	bottom: 20%;
+	background-color: #FFF;
+	box-shadow: 0 0 100px 50px #FFF;
+}

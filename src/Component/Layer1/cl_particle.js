@@ -39,6 +39,9 @@ export function Particle(x,y,radius,color,forcex,forcey,velox,veloy){
 	this.vel = new vec2d(velox,veloy);
 	this.force = new vec2d(forcex,forcey);
 	this.friction = true;
+	this.colide_frame = false;
+	this.colide_x_tolerance = 0;
+	this.colide_y_tolerance = 0;
 
 	this.draw = function(){
 		if(this.friction){
@@ -56,9 +59,14 @@ export function Particle(x,y,radius,color,forcex,forcey,velox,veloy){
 		
 		this.addForce();
 
-		if((this.x>=canvas.width || this.x<=0)||(this.y<=0 || this.y>=canvas.height)){
-			//validate wall
+		if(this.colide_frame){
+			if(this.loc.x>=canvas.width+this.colide_x_tolerance || this.loc.x<=0-this.colide_x_tolerance){
+				this.vel.x = (this.vel.x * (-1));
+			}else if(this.loc.y<=0-this.colide_y_tolerance || this.loc.y>=canvas.height+this.colide_y_tolerance) {
+				this.vel.y = (this.vel.y * (-1));
+			}
 		}
+		
 		this.draw();
 	}
 
@@ -196,7 +204,7 @@ function draw_dot(){
 	// console.log(destination_arr.length);
 }
 
-export function GetRandomDest(){
+export function GetRandomDestText(){
 	var rand = Math.round(Math.random()*destination_arr.length);
  	var temp = destination_arr.splice(rand,1);
  	if(typeof temp[0] === 'undefined') {
@@ -207,4 +215,10 @@ export function GetRandomDest(){
 
 export function GetTextIndex(){
 	return destination_arr.length;
+}
+
+export function GetRandomDest(){
+	var temp = new vec2d();
+	temp.set(Math.random()*canvas.width,Math.random()*canvas.height);
+	return temp;
 }

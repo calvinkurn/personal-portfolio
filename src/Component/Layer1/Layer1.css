@@ -6,8 +6,12 @@
 	bottom: 0;
 	line-height: 100vh;
 	text-align: center;
+	opacity: 1;
+	transition: 1s;
 }
-
+.wrapper.done {
+	opacity: 0;
+}
 .text {
 	font-size: 24px;
 	transition: 2s;
@@ -30,12 +34,14 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	transition: 2s ease;
+	transition: 1s ease;
 	background-color: #FFF;
 	z-index: -1;
+	opacity: 1;
+	transition: 1s;
 }
 
-.text:hover + .sparator {
+.hide {
 	opacity: 0;
 }
 
