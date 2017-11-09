@@ -15,8 +15,7 @@ class Loading extends React.Component {
 				</svg>
 				
 				<div className={[Loading_css.loader, Loading_css[this.props.hidden]].join(' ')}>
-				  <div>
-				    <div className={Loading_css.wrapper}>
+				  	<div className={Loading_css.wrapper}>
 				      <div className={Loading_css.container}>
 				        <div className={[Loading_css.dot, Loading_css.dot_1].join(' ')}></div>
 				        <div className={[Loading_css.dot, Loading_css.dot_2].join(' ')}></div>
@@ -24,7 +23,6 @@ class Loading extends React.Component {
 				        <div className={[Loading_css.dot, Loading_css.dot_4].join(' ')}></div>
 				      </div>
 				    </div>
-				  </div>
 				</div>
 			</div>
 		)

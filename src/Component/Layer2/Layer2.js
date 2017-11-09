@@ -1,5 +1,5 @@
 import React from 'react'
-import { initCanvas, Particle, render, GetRandomDest } from 'Component/Layer1/cl_particle.js'
+import { initCanvas, Particle, render, GetRandomDest } from 'Component/Canvas/cl_particle.js'
 import Layer2_css from './Layer2.css'
 
 var particle_arr = [];
