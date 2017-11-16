@@ -1,6 +1,7 @@
 var canvas,context;
 var loop;
 var destination_arr=[];
+var RAF;
 // var temp=[];
 
 export function checkInit(){
@@ -28,7 +29,21 @@ export function render(){
 
 	loop();
 
-	requestAnimationFrame(render);
+	RAF = requestAnimationFrame(render);
+}
+
+export function clearRAF(){
+	cancelAnimationFrame(RAF);
+}
+
+export function fadeOut(milisecond){
+	var fade = setInterval(function(){
+		context.globalAlpha -= 1 / milisecond;
+		console.log(context.globalAlpha);
+		if(context.globalAlpha < 0.01){
+			clearInterval(fade);
+		}
+	},1);
 }
 
 export function Particle(x,y,radius,color,forcex,forcey,velox,veloy){
@@ -60,9 +75,9 @@ export function Particle(x,y,radius,color,forcex,forcey,velox,veloy){
 		this.addForce();
 
 		if(this.colide_frame){
-			if(this.loc.x>=canvas.width+this.colide_x_tolerance || this.loc.x<=0-this.colide_x_tolerance){
+			if(this.loc.x + this.rad >= canvas.width + this.colide_x_tolerance || this.loc.x - this.rad <= 0 - this.colide_x_tolerance){
 				this.vel.x = (this.vel.x * (-1));
-			}else if(this.loc.y<=0-this.colide_y_tolerance || this.loc.y>=canvas.height+this.colide_y_tolerance) {
+			}else if(this.loc.y - this.rad <= 0 - this.colide_y_tolerance || this.loc.y + this.rad >= canvas.height + this.colide_y_tolerance) {
 				this.vel.y = (this.vel.y * (-1));
 			}
 		}

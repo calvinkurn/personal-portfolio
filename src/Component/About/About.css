@@ -1,0 +1,44 @@
+.about_content {
+	position: absolute;
+	top: 75px;
+	left: 150px;
+	right: 150px;
+	bottom: 75px;
+	border-width: 0 1px 0 1px;
+	border-style: solid;
+	border-color: #E0E0E0;
+	padding: 20px;
+	opacity: 0;
+	animation-name: fadeIn;
+    animation-duration: 2.5s;
+    animation-fill-mode: forwards;
+}
+
+.about_wrapper:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 10%;
+	border-top: 75px solid #FFF;
+	border-right: 150px solid rgba(0,0,0,0);
+	border-left: 150px solid rgba(0,0,0,0);
+}
+
+.about_wrapper:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 10%;
+	border-bottom: 75px solid #FFF;
+	border-right: 150px solid rgba(0,0,0,0);
+	border-left: 150px solid rgba(0,0,0,0);
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

@@ -1,6 +1,7 @@
 import React from 'react'
-import temp_css from './Temp.css'
-import { initCanvas, Repeler, Puller, Particle, render, Text, GetRandomDestText } from 'Component/cl_particle.js'
+import home_css from './Home.css'
+import Type from 'Component/Type/Type'
+import { fadeOut, clearRAF, initCanvas, Puller, Particle, render, GetRandomDestText } from 'Component/cl_particle.js'
 
 var puller;
 var action = false;
@@ -8,9 +9,13 @@ var action = false;
 export default class Temp extends React.Component {
 	constructor(props){
 		super(props);
+		this.click = this.click.bind(this);
+	}
+	componentWillUnmount(){
+		clearRAF();
 	}
 	componentDidMount(){
-		initCanvas(this.canvas,callback,window.innerWidth-7,window.innerHeight-7);
+		initCanvas(this.canvas,callback,window.innerWidth,window.innerHeight);
 		var particle_arr = [];
 		for(var i = 0 ; i < 20 ; i++){
 			var temp_size = (Math.random()*3)+2;
@@ -39,21 +44,22 @@ export default class Temp extends React.Component {
 		}
 	}
 	click(e){
-		//20 = radius puller
-		var xstart = window.innerWidth/2 - 20;
-		var xend = window.innerWidth/2 + 20;
-		var ystart = (window.innerHeight/2 + 50) - 20;
-		var yend = (window.innerHeight/2 + 50) + 20;
-		if((e.clientX >= xstart && e.clientX <= xend) && (e.clientY >= ystart && e.clientY <= yend)){
-			console.log('button');
-		}
+		action = true;
+		this.forceUpdate();
+		this.props.clickHandler(2);
+		fadeOut(450);
 	}
 	render(){
 		return(
 			<div>
-				<canvas className={temp_css.canvas} 
-				ref={(ref) => {this.canvas = ref}}
-				onClick={this.click}/>
+				{ !action &&
+					<div className={home_css.type__container}>
+						<Type/>
+						<div className={home_css.button__next} onClick={this.click}/>
+					</div>
+				}
+				<canvas className={home_css.canvas} 
+				ref={(ref) => {this.canvas = ref}}/>
 			</div>
 		)
 	}

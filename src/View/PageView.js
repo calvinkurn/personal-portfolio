@@ -1,7 +1,6 @@
 import React from 'react';
-import Layer1 from 'Component/Layer1/Layer1'
-import Layer2 from 'Component/Layer2/Layer2'
-import Temp from 'Component/Temp/Temp'
+import About from 'Component/About/About'
+import Home from 'Component/Home/Home'
 
 class PageView extends React.Component {
 	constructor(props){
@@ -17,25 +16,22 @@ class PageView extends React.Component {
 			this.setState({
 				layer: layer,
 			});
-		}.bind(this),1000);
+		}.bind(this),2000);
 	}
 	render() {
-		// switch(this.state.layer){
-		// 	case 1: return(
-		// 		<Layer1 clickHandler={this.clickHandler}/>
-		// 	);
-		// 	case 2: return(
-		// 		<Layer2/>
-		// 	);
-		// 	default: return(
-		// 		<div>
-		// 			state layer not found, what are you doing?
-		// 		</div>
-		// 	);
-		// }
-		return(
-			<Temp />
-		)
+		switch(this.state.layer){
+			case 1: return(
+				<About />
+			);
+			case 2: return(
+				<Home clickHandler={this.clickHandler}/>
+			);
+			default: return(
+				<div>
+					state layer not found, what are you doing?
+				</div>
+			);
+		}	
 	}
 }
 

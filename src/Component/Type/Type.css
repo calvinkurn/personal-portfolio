@@ -1,10 +1,8 @@
-.type_wrapper {
-	position: relative;
-}
-.type_wrapper span {
+span.type_component {
 	border-right: 1px solid #E0E0E0; 
 	animation: cursor 1s ease infinite;
 	padding: 0 2px;
+	background-color: rgba(255,255,255,0.3);
 }
 @keyframes cursor {
   0% {
