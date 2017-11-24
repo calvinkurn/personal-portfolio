@@ -1,7 +1,8 @@
 var canvas,context;
 var loop;
-var destination_arr=[];
+var destination_arr = [];
 var RAF;
+var list_connection = [];
 // var temp=[];
 
 export function checkInit(){
@@ -57,6 +58,9 @@ export function Particle(x,y,radius,color,forcex,forcey,velox,veloy){
 	this.colide_frame = false;
 	this.colide_x_tolerance = 0;
 	this.colide_y_tolerance = 0;
+	this.connection = false;
+	this.min_connection = 0;
+	this.max_connection = this.min_connection + 100;
 
 	this.draw = function(){
 		if(this.friction){
@@ -68,7 +72,7 @@ export function Particle(x,y,radius,color,forcex,forcey,velox,veloy){
   		context.fill();
 	}
 
-	this.move = function(index){
+	this.move = function(ParticleArr,index){
 		this.loc.x+=(this.vel.x);
 		this.loc.y+=(this.vel.y);
 		
@@ -82,6 +86,12 @@ export function Particle(x,y,radius,color,forcex,forcey,velox,veloy){
 			}
 		}
 		
+		if(this.connection){
+			if(index === 0){
+				drawConnection(ParticleArr,index);
+			}
+		}
+
 		this.draw();
 	}
 
@@ -99,7 +109,8 @@ export function Particle(x,y,radius,color,forcex,forcey,velox,veloy){
 	}
 
 	this.checkCollide = function(target){
-		var dist = Math.sqrt(Math.pow(this.loc.x - target.loc.x,2) + Math.pow(this.loc.y - target.loc.y,2));
+		var dist = ecluDist(this,target);
+		// var dist = Math.sqrt(Math.pow(this.loc.x - target.loc.x,2) + Math.pow(this.loc.y - target.loc.y,2));
 		dist = dist - (this.rad + target.rad);
 		if(dist <= 1){
 			var tolerant = this.rad/2;
@@ -279,10 +290,10 @@ export function Text(text){
  	context.fillStyle="#f00";
 
  	context.strokeText(text,x,y);
- 	draw_dot();
+ 	getDotLoc();
 }
 
-function draw_dot(){
+function getDotLoc(){
 	destination_arr=[];
  	var image_data=context.getImageData(0,0,canvas.width,canvas.height);
 	var pixel=image_data.data;
@@ -316,3 +327,39 @@ export function GetRandomDest(){
 	temp.set(Math.random()*canvas.width,Math.random()*canvas.height);
 	return temp;
 }
+
+function drawConnection(ParticleArr,currindex){
+	list_connection = [];
+	let curr = ParticleArr[currindex];
+	ParticleArr.forEach(function(particle,index){
+		if(currindex !== index){
+			var dist = ecluDist(ParticleArr[currindex],particle);
+			if( dist <= curr.max_connection && dist >= curr.min_connection){
+				if(list_connection[index] === undefined){
+					var opacity=1-(dist/curr.max_connection);
+					context.beginPath();
+					context.strokeStyle = "RGBA(94,168,241,"+opacity+")";
+					context.moveTo(curr.loc.x,curr.loc.y);
+					context.lineTo(particle.loc.x, particle.loc.y);
+					context.stroke();
+					context.closePath();
+					
+					if(list_connection[currindex] === undefined){
+						list_connection[currindex] = [];
+						list_connection[currindex][index] = true;
+					}
+				}else if(list_connection[index][currindex] === undefined){
+
+				}
+			}
+		}
+	});
+	console.log(list_connection);
+}
+
+function ecluDist(location1,location2){
+	return Math.sqrt(Math.pow(location1.loc.x - location2.loc.x , 2) + Math.pow(location1.loc.y - location2.loc.y , 2));
+}
+
+window.stopCanvas = clearRAF;
+window.startCanvas = render;

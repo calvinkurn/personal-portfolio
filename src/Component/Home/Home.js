@@ -5,6 +5,7 @@ import { fadeOut, clearRAF, initCanvas, Puller, Particle, render, GetRandomDestT
 
 var puller;
 var action = false;
+var particle_arr = [];
 
 export default class Temp extends React.Component {
 	constructor(props){
@@ -15,8 +16,7 @@ export default class Temp extends React.Component {
 		clearRAF();
 	}
 	componentDidMount(){
-		initCanvas(this.canvas,callback,window.innerWidth,window.innerHeight);
-		var particle_arr = [];
+		initCanvas(this.canvas,this.callback,window.innerWidth,window.innerHeight);
 		for(var i = 0 ; i < 20 ; i++){
 			var temp_size = (Math.random()*3)+2;
 			var temp_dest = GetRandomDestText();
@@ -31,17 +31,16 @@ export default class Temp extends React.Component {
 		puller = new Puller(window.innerWidth/2,(window.innerHeight/2)+50,20,"rgba(255,10,10,0.5)",0,0,0,0);
 
 		render();
-
-		function callback(){
-			particle_arr.forEach(function(particle){
-				if(action){
-					particle.pushed(puller);
-				}
-				particle.checkCollide(puller.getPullerPulse());
-				particle.move();
-			});
-			puller.move();
-		}
+	}
+	callback(){
+		particle_arr.forEach(function(particle){
+			if(action){
+				particle.pushed(puller);
+			}
+			particle.checkCollide(puller.getPullerPulse());
+			particle.move();
+		});
+		puller.move();
 	}
 	click(e){
 		action = true;

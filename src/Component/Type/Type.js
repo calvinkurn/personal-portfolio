@@ -5,6 +5,7 @@ var active_word = 0;
 var writing, clear_word;
 var typo_state = false;
 var repeat = false;
+var random;
 
 class Type extends React.Component {
 	constructor(props){
@@ -38,7 +39,7 @@ class Type extends React.Component {
 				this.refs.com.innerHTML = value_com.slice(0,value_com.length-1);
 				typo_state = false;
 			}else if(!repeat){
-				var random = Math.random();
+				random = Math.random();
 				if(random < this.props.typo_rate){
 					this.refs.com.innerHTML += '-';
 					typo_state = true;
@@ -50,7 +51,7 @@ class Type extends React.Component {
 					}	
 				}
 			}else{
-				var random = Math.random();
+				random = Math.random();
 				if(random < this.props.typo_rate){
 					this.refs.com.innerHTML += '-';
 					typo_state = true;
