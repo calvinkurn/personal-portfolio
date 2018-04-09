@@ -27,7 +27,11 @@ export function clearcanvas() {
 export function render() {
 	clearcanvas();
 
+	context.beginPath();
+
 	loop();
+
+	context.fill();
 
 	RAF = requestAnimationFrame(render);
 }
@@ -65,10 +69,12 @@ export function Particle(x, y, radius, color, forcex, forcey, velox, veloy) {
 		if (this.friction) {
 			this.vel.set(this.vel.x / 1.05, this.vel.y / 1.05);
 		}
-		context.beginPath();
+		// context.beginPath();
 		context.fillStyle = this.col;
+		context.moveTo(this.loc.x + this.rad, this.loc.y);
 		context.arc(this.loc.x, this.loc.y, this.rad, 0, 2 * Math.PI);
-		context.fill();
+		// context.closePath();
+		// context.fill();
 	};
 
 	this.move = function(ParticleArr, index) {

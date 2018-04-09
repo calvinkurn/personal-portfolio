@@ -101,7 +101,6 @@ export default class Temp extends React.Component {
 		// 		particle.checkCollide(particle_image[0]);
 		// 	particle.move();
 		// });
-
 		particle_image.forEach(function(particle, index) {
 			// particle.draw();
 			// console.log(image_coor[index]);
@@ -116,8 +115,9 @@ export default class Temp extends React.Component {
 				image_coor[index] = "";
 			}
 		});
-
 		// puller.move();
+
+		// globalDraw(particle_image);
 	};
 
 	click = e => {
