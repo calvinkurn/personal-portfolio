@@ -6,7 +6,7 @@ export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			layer: 1
+			layer: 2
 		};
 
 		this.clickHandler = this.clickHandler.bind(this);

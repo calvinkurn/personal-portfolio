@@ -28,23 +28,19 @@ export default class ImgParticle extends React.Component {
 			window.innerHeight
 		);
 
-		// init canvas for image
-		this.tempCanvas.width = window.innerWidth;
-		this.tempCanvas.height = window.innerHeight;
-
 		// get coordinate on
 		var imgCanvas = new Image();
 		imgCanvas.src = img;
 		imgCanvas.onload = function() {
 			image_coor = getRGB(
-				this.tempCanvas,
+				this.canvas,
 				0,
 				0,
-				this.tempCanvas.width,
-				this.tempCanvas.height,
+				this.canvas.width,
+				this.canvas.height,
 				imgCanvas,
-				this.tempCanvas.width / 2,
-				this.tempCanvas.height / 2
+				this.canvas.width / 2,
+				this.canvas.height / 2
 			);
 			// console.log(image_coor);
 
@@ -82,29 +78,13 @@ export default class ImgParticle extends React.Component {
 
 	render() {
 		return (
-			<React.Fragment>
-				<canvas
-					id="canvas"
-					style={{ display: "block" }}
-					ref={ref => {
-						this.canvas = ref;
-					}}
-				/>
-				<canvas
-					ref={ref => {
-						this.tempCanvas = ref;
-					}}
-					style={{
-						position: "fixed",
-						zIndex: "-1",
-						left: "0",
-						right: "0",
-						top: "0",
-						bottom: "0",
-						display: "none"
-					}}
-				/>
-			</React.Fragment>
+			<canvas
+				id="canvas"
+				style={{ display: "block" }}
+				ref={ref => {
+					this.canvas = ref;
+				}}
+			/>
 		);
 	}
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./About.css";
 import ImgParticle from "Component/ImgParticle/ImgParticle.js";
+import img from "haunter_bold.png";
 
 class About extends React.Component {
 	constructor(props) {
@@ -16,7 +17,9 @@ class About extends React.Component {
 				<div
 					className={style.button__call__part}
 					onClick={this.imgParticleHandler}
-				/>
+				>
+					<img src={img} alt="Haunter" />
+				</div>
 				<div
 					ref={ref => {
 						this.canvasParent = ref;
