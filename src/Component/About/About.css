@@ -6,46 +6,66 @@
 	bottom: 75px;
 	border-width: 0 1px 0 1px;
 	border-style: solid;
-	border-color: #E0E0E0;
+	border-color: #e0e0e0;
 	padding: 20px;
 	opacity: 0;
 	animation-name: fadeIn;
-    animation-duration: 5s;
-    animation-fill-mode: forwards;
-    background-color: rgba(255,255,255,.7);
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
+	background-color: rgba(255, 255, 255, 0.7);
 }
+
 .about_wrapper {
 	display: flex;
 }
+
 .about_wrapper:before {
-	content: '';
+	content: "";
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	height: 10%;
-	border-top: 75px solid rgba(255,255,255,0.5);
+	border-top: 75px solid rgba(255, 255, 255, 0.5);
 	border-right: 150px solid transparent;
 	border-left: 150px solid transparent;
 	animation-name: fadeIn;
-    animation-duration: 5s;
-    animation-fill-mode: forwards;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
 }
+
 .about_wrapper:after {
-	content: '';
+	content: "";
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	height: 10%;
-	border-bottom: 75px solid rgba(255,255,255,0.5);
+	border-bottom: 75px solid rgba(255, 255, 255, 0.5);
 	border-right: 150px solid transparent;
 	border-left: 150px solid transparent;
 	animation-name: fadeIn;
-    animation-duration: 5s;
-    animation-fill-mode: forwards;
+	animation-duration: 5s;
+	animation-fill-mode: forwards;
 }
+
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.button__call__part {
+	position: absolute;
+	display: inline-block;
+	left: 8px;
+	top: 8px;
+	border-radius: 4px;
+	background-color: #f5625e;
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
 }

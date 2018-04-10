@@ -27,27 +27,33 @@ export function clearcanvas() {
 export function render() {
 	clearcanvas();
 
-	context.beginPath();
+	// context.beginPath();
 
 	loop();
 
-	context.fill();
+	// context.fill();
 
 	RAF = requestAnimationFrame(render);
 }
 
 export function clearRAF() {
+	clearcanvas();
 	cancelAnimationFrame(RAF);
 }
 
 export function fadeOut(milisecond) {
 	var fade = setInterval(function() {
 		context.globalAlpha -= 1 / milisecond;
-		console.log(context.globalAlpha);
 		if (context.globalAlpha < 0.01) {
 			clearInterval(fade);
 		}
 	}, 1);
+}
+
+export function drawBundler(callback) {
+	context.beginPath();
+	callback();
+	context.fill();
 }
 
 export function Particle(x, y, radius, color, forcex, forcey, velox, veloy) {
@@ -279,10 +285,10 @@ export function Repellent(x, y, radius, color, forcex, forcey, velox, veloy) {
 		if (this.friction) {
 			this.vel.set(this.vel.x / 1.05, this.vel.y / 1.05);
 		}
-		context.beginPath();
+		// context.beginPath();
 		context.fillStyle = this.col;
 		context.arc(this.loc.x, this.loc.y, this.rad, 0, 2 * Math.PI);
-		context.fill();
+		// context.fill();
 	};
 
 	this.move = function(index) {
@@ -423,7 +429,7 @@ function drawConnection(ParticleArr, currindex) {
 			}
 		}
 	});
-	console.log(list_connection);
+	// console.log(list_connection);
 }
 
 // dist particle

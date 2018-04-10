@@ -1,0 +1,7 @@
+particle example draw function:
+
+drawBundler(function() {
+	particle_arr.forEach(function(particle) {
+		particle.draw()
+	});
+});

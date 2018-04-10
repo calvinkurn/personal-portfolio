@@ -1,43 +1,38 @@
-import React from 'react'
-import about_css from './About.css'
-import { initCanvas, Particle, render } from 'Component/cl_particle.js'
-
-var particle_arr = [];
+import React from "react";
+import style from "./About.css";
+import ImgParticle from "Component/ImgParticle/ImgParticle.js";
 
 class About extends React.Component {
-	componentDidMount(){
-		initCanvas(this.canvas,this.callback,window.innerWidth-1,window.innerHeight);
-		
-		let part = new Particle(50,50,10,'#000',0,0,0.5,0.5);
-		part.friction = false;
-		part.colide_frame = true;
-		part.connection = true;
-		particle_arr.push(part);
-		let part2 = new Particle(100,100,10,'#000',0,0,0.55,0.55);
-		part2.friction = false;
-		part2.colide_frame = true;
-		part2.connection = true;
-		particle_arr.push(part2);
-
-		render();
+	constructor(props) {
+		super();
+		this.state = { imageParticle: false };
 	}
-	callback(){
-		// particle_arr.forEach(function(particle,index){
-		// 	particle.drawConnection(particle_arr,index);
-		// });
-		particle_arr.forEach(function(particle,index){
-			particle.move(particle_arr,index);
-		});
-	}
-	render(){
-		return(
-			<div ref={(ref) => {this.canvasParent = ref}} className={about_css.about_wrapper}>
-				<div className={about_css.about_content}>
-					asd
+	imgParticleHandler = () => {
+		this.setState({ imageParticle: true });
+	};
+	render() {
+		return (
+			<React.Fragment>
+				<div
+					className={style.button__call__part}
+					onClick={this.imgParticleHandler}
+				/>
+				<div
+					ref={ref => {
+						this.canvasParent = ref;
+					}}
+					className={style.about_wrapper}
+				>
+					<div className={style.about_content}>
+						lorem lorem lorem lorem lorem lorem lorem loremlorem lorem lorem
+						loremlorem lorem lorem loremlorem lorem lorem loremlorem lorem lorem
+						loremlorem lorem lorem loremlorem lorem lorem loremlorem lorem lorem
+						lorem
+					</div>
 				</div>
-				<canvas className={about_css.canvas} ref={(ref) => {this.canvas = ref}}/>
-			</div>
-		)
+				{this.state.imageParticle && <ImgParticle />}
+			</React.Fragment>
+		);
 	}
 }
 

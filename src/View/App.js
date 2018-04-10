@@ -2,11 +2,11 @@ import React from "react";
 import About from "Component/About/About";
 import Home from "Component/Home/Home";
 
-class PageView extends React.Component {
+export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			layer: 2
+			layer: 1
 		};
 
 		this.clickHandler = this.clickHandler.bind(this);
@@ -24,13 +24,12 @@ class PageView extends React.Component {
 	render() {
 		switch (this.state.layer) {
 			case 1:
-				return <About />;
-			case 2:
 				return <Home clickHandler={this.clickHandler} />;
+			case 2:
+				return <About />;
 			default:
 				return <div>state layer not found, what are you doing?</div>;
 		}
 	}
 }
 
-export default PageView;

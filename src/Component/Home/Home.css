@@ -27,15 +27,3 @@
 	border-radius: 50%;
 	cursor: pointer;
 }
-
-.button__call__part {
-	position: absolute;
-	display: inline-block;
-	left: 8px;
-	top: 8px;
-	border-radius: 4px;
-	background-color: #f5625e;
-	width: 40px;
-	height: 40px;
-	cursor: pointer;
-}
