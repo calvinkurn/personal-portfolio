@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Home.css";
-import Type from "Component/Type/Type";
+// import Type from "Component/Type/Type";
 import {
 	fadeOut,
 	clearRAF,
@@ -10,6 +10,7 @@ import {
 	render,
 	GetRandomDestText,
 	drawBundler
+	// drawConnection
 } from "Component/cl_particle.js";
 
 var puller; // puller object
@@ -20,6 +21,7 @@ export default class Temp extends React.Component {
 	constructor(props) {
 		super(props);
 		this.click = this.click.bind(this);
+		this.veloLimit = 0.8;
 	}
 
 	componentWillUnmount() {
@@ -35,16 +37,16 @@ export default class Temp extends React.Component {
 		);
 
 		// init particle on initial page
-		for (var i = 0; i < 25; i++) {
+		for (var i = 0; i < 30; i++) {
 			var temp_size = Math.random() * 1.5 + 1;
 			var temp_loc = GetRandomDestText();
-			var rand_velox = Math.random() * 2 - 1;
-			var rand_veloy = Math.random() * 2 - 1;
+			var rand_velox = Math.random() * 1.3 - 0.7;
+			var rand_veloy = Math.random() * 1.3 - 0.7;
 			var new_particle = new Particle(
 				temp_loc.x,
 				temp_loc.y,
 				temp_size,
-				"#9F96D9",
+				"#3F87DE",
 				0,
 				0,
 				rand_velox,
@@ -52,6 +54,10 @@ export default class Temp extends React.Component {
 			);
 			new_particle.colide_frame = true;
 			new_particle.friction = false;
+			new_particle.connection = true;
+			new_particle.connectionColor = { r: "82", g: "199", b: "245" };
+			new_particle.connectionWidth = 0.8;
+			new_particle.max_connection = 150;
 			particle_arr.push(new_particle);
 		}
 
@@ -71,15 +77,32 @@ export default class Temp extends React.Component {
 	}
 
 	callback = () => {
+		var veloLimit = this.veloLimit;
 		drawBundler(function() {
-			particle_arr.forEach(function(particle) {
+			particle_arr.forEach(function(particle, index) {
+				if (
+					particle.friction === false &&
+					(particle.vel.x > veloLimit || particle.vel.y > veloLimit)
+				) {
+					particle.friction = true;
+				} else if (particle.vel.x < veloLimit || particle.vel.y < veloLimit) {
+					particle.friction = false;
+				}
 				if (action) {
 					particle.pushed(puller);
 				}
 				particle.checkCollide(puller.getPullerPulse());
-				particle.move();
+				particle.move(particle_arr, index);
+				for (var i = 0; i < particle_arr.length; i++) {
+					if (i === index) continue;
+					particle.checkCollide(particle_arr[i]);
+				}
 			});
 		});
+
+		// for (var i = 0; i < particle_arr.length; i++) {
+		// 	drawConnection(particle_arr, i);
+		// }
 
 		puller.move();
 	};
@@ -96,7 +119,7 @@ export default class Temp extends React.Component {
 				{!action && (
 					<React.Fragment>
 						<div className={style.type__container}>
-							<Type />
+							{/*<Type />*/}
 							<div className={style.button__next} onClick={this.click} />
 						</div>
 					</React.Fragment>

@@ -68,6 +68,8 @@ export function Particle(x, y, radius, color, forcex, forcey, velox, veloy) {
 	this.colide_x_tolerance = 0;
 	this.colide_y_tolerance = 0;
 	this.connection = false;
+	this.connectionColor = "#000";
+	this.connectionWidth = 1;
 	this.min_connection = 0;
 	this.max_connection = this.min_connection + 100;
 
@@ -103,11 +105,9 @@ export function Particle(x, y, radius, color, forcex, forcey, velox, veloy) {
 			}
 		}
 
-		if (this.connection) {
-			if (index === 0) {
-				drawConnection(ParticleArr, index);
-			}
-		}
+		// if (this.connection && ParticleArr !== null && index !== null) {
+		// 	drawConnection(ParticleArr, index);
+		// }
 
 		this.draw();
 	};
@@ -404,7 +404,7 @@ export function GetRandomDest() {
 	return temp;
 }
 
-function drawConnection(ParticleArr, currindex) {
+export function drawConnection(ParticleArr, currindex) {
 	list_connection = [];
 	let curr = ParticleArr[currindex];
 	ParticleArr.forEach(function(particle, index) {
@@ -414,7 +414,17 @@ function drawConnection(ParticleArr, currindex) {
 				if (list_connection[index] === undefined) {
 					var opacity = 1 - dist / curr.max_connection;
 					context.beginPath();
-					context.strokeStyle = "RGBA(94,168,241," + opacity + ")";
+					context.strokeStyle =
+						"RGBA(" +
+						curr.connectionColor.r +
+						"," +
+						curr.connectionColor.g +
+						"," +
+						curr.connectionColor.b +
+						"," +
+						opacity +
+						")";
+					context.lineWidth = curr.connectionWidth;
 					context.moveTo(curr.loc.x, curr.loc.y);
 					context.lineTo(particle.loc.x, particle.loc.y);
 					context.stroke();
