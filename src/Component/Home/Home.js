@@ -130,7 +130,6 @@ export default class Temp extends React.Component {
 					ref={ref => {
 						this.canvas = ref;
 					}}
-					onClick={this.test}
 				/>
 			</React.Fragment>
 		);
